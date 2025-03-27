@@ -1,4 +1,3 @@
-
 !(function($) {
   "use strict";
 
@@ -146,10 +145,45 @@
     }
   });
 
-  // Initi AOS
+  // Initialize AOS
   AOS.init({
     duration: 1000,
     easing: "ease-in-out-back"
+  });
+
+  // Academic publications section (if needed)
+  $('.publication-item').hover(
+    function() {
+      $(this).find('.publication-abstract').slideDown(300);
+    },
+    function() {
+      $(this).find('.publication-abstract').slideUp(300);
+    }
+  );
+  
+  // Research interests expandable sections
+  $('.research-toggle').on('click', function() {
+    $(this).next('.research-content').slideToggle();
+    $(this).find('i').toggleClass('icofont-plus icofont-minus');
+    return false;
+  });
+  
+  // Project details modal functionality
+  $('.project-details-btn').on('click', function() {
+    var projectId = $(this).data('project');
+    $('#' + projectId).modal('show');
+    return false;
+  });
+  
+  // CV download tracking (if implemented)
+  $('.cv-download').on('click', function() {
+    // Track download event if analytics is implemented
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'download', {
+        'event_category': 'CV',
+        'event_label': 'CV Download'
+      });
+    }
   });
 
 })(jQuery);
